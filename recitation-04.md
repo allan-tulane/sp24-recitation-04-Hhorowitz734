@@ -36,7 +36,9 @@ To use this function to count words, you'll need to implement your own `map_f` a
 
 4. Assume that a word `w` appears `n` times. What is the **work** and **span** of `word_count_reduce` for this word, assuming a parallel implementation of the `reduce` function?
 
-**Enter answer here**
+If a word w appears n times, the **work** of this algorithm would be **O(n)**, since it needs to go over every occurence of the word to sum it.
+
+However, the **span** would be **log_2(n)**, as if we parallelize the algorithm, we are essentially turning this process into a tree like situation.
 
 
 5. Why are we going through all this trouble? Couldn't I just use this function to count words?
@@ -52,7 +54,7 @@ for doc in docs:
 
 What is the problem that prevents us from easily parallelizing this solution?
 
-**Enter answer here**
+This solution relies on a dictionary `counts` that has a constant state within the function. However, if you parallelize this, each parallel process would need to have its own `counts`, or you risk errors due to the changing state of counts. 
 
 
 ## Part 2: Sentiment analysis
